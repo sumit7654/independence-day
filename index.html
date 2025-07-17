@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15 August 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            overflow-x: auto;
+        }
+
+        #video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+            /* Prevents click blocking */
+        }
+
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            position: relative;
+            top: 5%;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: yellow;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 12px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 5px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-style: italic;
+            background: linear-gradient(130deg, #FF9933 33%, white 33%, white 66%, #138808 66%);
+            /* background: #0047ab; */
+            color: rgb(4, 0, 5);
+            cursor: pointer;
+        }
+
+        #shareName,
+        #totalShares {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        audio {
+            display: none;
+        }
+
+        .shared-by-name {
+            color: yellow;
+            font-weight: 700;
+            font-family: cursive;
+            font-size: 2rem;
+
+        }
+
+        #fireworks {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .emoji {
+            font-size: 4rem;
+            animation: pop 1s infinite;
+        }
+
+
+        .flag-image,
+        .user-photo {
+            margin: 5px auto;
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay loop id="video-bg">
+        <source src="/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+    <div id="fireworks">
+        <div class="emoji">🎆🎇🇮🇳</div>
+        <p>Happy Independence Day!</p>
+    </div>
+    <div class="container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbRZepCRwqEq-AIKvxsGgyyRWcow0bSShUNg&s"
+            alt="Indian Flag" class="flag-image">
+        <h1>स्वतंत्रता दिवस की हार्दिक शुभकामनाएं! 🇮🇳 </h1>
+        <div id="shareName"></div>
+        <div class="countdown" id="countdown"></div>
+        <div class="input-box">
+            <input type="text" id="yourName" placeholder="Enter your name">
+            <button onclick="generateWhatsAppLink()"><i class="fa-brands fa-whatsapp"></i>Share on WhatsApp</button>
+        </div>
+        <img src="/Gemini_Generated_Image_ntt81nntt81nntt8.png" alt="User" class="user-photo">
+        <!-- <div id="shareName"></div> -->
+        <div id="totalShares">Total Shares: <span id="shareCount">0</span></div>
+    </div>
+    <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2023/03/24/audio_b152116fae.mp3?filename=freedom-142857.mp3"
+            type="audio/mp3">
+    </audio>
+    <script>
+        const end = new Date('2025-08-15T00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = end - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = "🎉 It's 15th August!";
+                document.getElementById('fireworks').style.display = 'flex';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('countdown').innerHTML =
+                `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function generateWhatsAppLink() {
+            const name = document.getElementById('yourName').value.trim();
+            if (name) {
+                const count = parseInt(localStorage.getItem('totalShares') || '0') + 1;
+                localStorage.setItem('totalShares', count);
+                document.getElementById('shareCount').innerText = count;
+
+                const url = `${window.location.origin + window.location.pathname}?sharedby=${encodeURIComponent(name)}`;
+                const message = `🇮🇳 Independence Day Countdown is on!\n\nShared by *${name}*\n\nClick to see: ${url}`;
+                const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                window.open(whatsappLink, '_blank');
+
+                document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
+            }
+        }
+
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('sharedby');
+            if (name) {
+                document.getElementById("shareName").innerHTML = `<span class="shared-by-text">This was shared to you by: </span><span class="shared-by-name">${name}</span>`;
+            }
+            fetchGlobalShareCount();
+        }
+    </script>
+
+</body>
+
+</html>
