@@ -184,7 +184,11 @@
         <div class="countdown" id="countdown"></div>
         <div class="input-box">
             <input type="text" id="yourName" placeholder="Enter your name">
-            <button onclick="generateWhatsAppLink()"><i class="fa-brands fa-whatsapp"></i>Share on WhatsApp</button>
+            <a id="realShareBtn" target="_blank" rel="noopener noreferrer">
+  <button class="btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर भेजें</button>
+</a>
+
+<!--             <button onclick="generateWhatsAppLink()"><i class="fa-brands fa-whatsapp"></i>Share on WhatsApp</button> -->
         </div>
         <img src="./Gemini_Generated_Image_ntt81nntt81nntt8.png" alt="User" class="user-photo">
         <!-- <div id="shareName"></div> -->
@@ -195,15 +199,145 @@
             type="audio/mp3">
     </audio> -->
     <script>
-        const video = document.getElementById("video-bg");
+// const shareBtn = document.getElementById("realShareBtn");
 
-    // Unmute and play video on first click anywhere on the page
-    window.addEventListener("click", () => {
-      video.muted = false;
-      video.play();
-    }, { once: true }); // Trigger only once
+// shareBtn.addEventListener("click", (e) => {
+//   const name = document.getElementById("yourName").value.trim();
+//   if (!name) {
+//     alert("कृपया पहले अपना नाम डालें!");
+//     e.preventDefault(); // Prevent blank share
+//     return;
+//   }
 
-    // Countdown to 15 August
+//   localStorage.setItem("name", name); // Save name for reuse
+
+//   const msg = `🇮🇳 *स्वतंत्रता दिवस की शुभकामनाएं!* 🇮🇳
+
+// ${name} की ओर से आपको और आपके परिवार को स्वतंत्रता दिवस की हार्दिक शुभकामनाएं!
+
+// 👇 यहां क्लिक करके शुभकामनाएं देखें:
+// ${window.location.href}`;
+
+//   const whatsappLink = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+//   shareBtn.href = whatsappLink;
+// });
+
+// // Call once when page loads
+// updateShareLink();
+
+
+        
+//         const video = document.getElementById("video-bg");
+
+//     // Unmute and play video on first click anywhere on the page
+//     window.addEventListener("click", () => {
+//       video.muted = false;
+//       video.play();
+//     }, { once: true }); // Trigger only once
+
+//     // Countdown to 15 August
+//     const countdown = document.getElementById("countdown");
+//     function updateCountdown() {
+//       const eventDate = new Date("August 15, 2025 00:00:00").getTime();
+//       const now = new Date().getTime();
+//       const diff = eventDate - now;
+
+//       if (diff <= 0) {
+//         countdown.innerText = "🎉 Happy Independence Day! 🇮🇳";
+//         return;
+//       }
+
+//       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+//       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+//       const minutes = Math.floor((diff / (1000 * 60)) % 60);
+//       const seconds = Math.floor((diff / 1000) % 60);
+
+//       countdown.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+//     }
+
+//     setInterval(updateCountdown, 1000);
+//     updateCountdown(); // Run once immediately
+
+//         function generateWhatsAppLink() {
+//             const name = document.getElementById('yourName').value.trim();
+//             if (name) {
+//                 const count = parseInt(localStorage.getItem('totalShares') || '0') + 1;
+//                 localStorage.setItem('totalShares', count);
+//                 // document.getElementById('shareCount').innerText = count;
+
+//                 const url = `${window.location.origin + window.location.pathname}?sharedby=${encodeURIComponent(name)}`;
+//  const message = `🇮🇳 🇮🇳 Happy Independence Day 2025 – एक खास संदेश मेरी तरफ से 🇮🇳
+
+// "वो सुबह कभी तो आएगी..."
+// जिसके लिए लाखों वीरों ने हँसते-हँसते अपने प्राण न्यौछावर कर दिए।
+// आज उन्हीं के बलिदान का नतीजा है ये आज़ादी – हमारा गर्व, हमारी पहचान।
+// \nClick to see: ${url}\n\nShared by  *${name}*
+
+// 🕊️ इस 15 अगस्त 2025,
+// मैं और मेरी परिवार की तरफ से,
+// आप और आपके पूरे परिवार को
+// स्वतंत्रता दिवस की हार्दिक शुभकामनाएं।
+// May this day remind us not only of our rights but also our duty towards our Nation.
+
+// 💚 चलो फिर से खुद को जगाते हैं,
+// अनुशासन का दीप जलाते हैं,
+// शहीदों की चिताओं पर लगाएँगे हर साल मेला,
+// ऐसा भारत फिर से बनाते हैं। 🇮🇳
+
+// 🎉 Proud to be Indian. Proud to share this moment with you.`;
+                
+//                 // const message = `🇮🇳 Independence Day Countdown is on!\n\nShared by *${name}*\n\nClick to see: ${url}`;
+//                 const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+// //         const a = document.createElement('a');
+// // a.href = whatsappLink;
+// // a.target = '_blank';
+// // a.rel = 'noopener noreferrer'; // important for Safari
+// // document.body.appendChild(a);
+// // a.click();
+// // a.remove();
+
+//                         document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
+//         }
+
+//         window.onload = () => {
+//             const params = new URLSearchParams(window.location.search);
+//             const name = params.get('sharedby');
+//             if (name) {
+//                 document.getElementById("shareName").innerHTML = `<span class="shared-by-text">This was shared to you by: </span><span class="shared-by-name">${name}</span>`;
+//             }
+//             fetchGlobalShareCount();
+//         }
+
+        // ############################################################
+        const shareBtn = document.getElementById("realShareBtn");
+
+    shareBtn.addEventListener("click", (e) => {
+      const name = document.getElementById("yourName").value.trim();
+      if (!name) {
+        alert("कृपया पहले अपना नाम डालें!");
+        e.preventDefault();
+        return;
+      }
+
+      localStorage.setItem("name", name);
+
+      const url = `${window.location.origin + window.location.pathname}?sharedby=${encodeURIComponent(name)}`;
+      const msg = `🇮🇳 *स्वतंत्रता दिवस की शुभकामनाएं!* 🇮🇳\n\n${name} की ओर से आपको और आपके परिवार को स्वतंत्रता दिवस की हार्दिक शुभकामनाएं!\n\n👇 यहां क्लिक करके शुभकामनाएं देखें:\n${url}`;
+
+      const whatsappLink = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      shareBtn.href = whatsappLink;
+
+      document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
+    });
+
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('sharedby');
+      if (name) {
+        document.getElementById("shareName").innerHTML = `<span class="shared-by-text">This was shared to you by: </span><span class="shared-by-name">${name}</span>`;
+      }
+    }
+
     const countdown = document.getElementById("countdown");
     function updateCountdown() {
       const eventDate = new Date("August 15, 2025 00:00:00").getTime();
@@ -224,53 +358,14 @@
     }
 
     setInterval(updateCountdown, 1000);
-    updateCountdown(); // Run once immediately
+    updateCountdown();
 
-        function generateWhatsAppLink() {
-            const name = document.getElementById('yourName').value.trim();
-            if (name) {
-                const count = parseInt(localStorage.getItem('totalShares') || '0') + 1;
-                localStorage.setItem('totalShares', count);
-                // document.getElementById('shareCount').innerText = count;
-
-                const url = `${window.location.origin + window.location.pathname}?sharedby=${encodeURIComponent(name)}`;
- const message = `🇮🇳 🇮🇳 Happy Independence Day 2025 – एक खास संदेश मेरी तरफ से 🇮🇳
-
-"वो सुबह कभी तो आएगी..."
-जिसके लिए लाखों वीरों ने हँसते-हँसते अपने प्राण न्यौछावर कर दिए।
-आज उन्हीं के बलिदान का नतीजा है ये आज़ादी – हमारा गर्व, हमारी पहचान।
-\nClick to see: ${url}\n\nShared by  *${name}*
-
-🕊️ इस 15 अगस्त 2025,
-मैं और मेरी परिवार की तरफ से,
-आप और आपके पूरे परिवार को
-स्वतंत्रता दिवस की हार्दिक शुभकामनाएं।
-May this day remind us not only of our rights but also our duty towards our Nation.
-
-💚 चलो फिर से खुद को जगाते हैं,
-अनुशासन का दीप जलाते हैं,
-शहीदों की चिताओं पर लगाएँगे हर साल मेला,
-ऐसा भारत फिर से बनाते हैं। 🇮🇳
-
-🎉 Proud to be Indian. Proud to share this moment with you.`;
-                
-                // const message = `🇮🇳 Independence Day Countdown is on!\n\nShared by *${name}*\n\nClick to see: ${url}`;
-                const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
-        const a = document.createElement('a');
-        a.href = whatsappLink;
-        a.target = '_blank';
-        a.click();
-                        document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
-        }
-
-        window.onload = () => {
-            const params = new URLSearchParams(window.location.search);
-            const name = params.get('sharedby');
-            if (name) {
-                document.getElementById("shareName").innerHTML = `<span class="shared-by-text">This was shared to you by: </span><span class="shared-by-name">${name}</span>`;
-            }
-            fetchGlobalShareCount();
-        }
+    const video = document.getElementById("video-bg");
+    window.addEventListener("click", () => {
+      video.muted = false;
+      video.play();
+    }, { once: true });
+  </script>
     </script>
 
 </body>
