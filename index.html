@@ -193,28 +193,36 @@
             type="audio/mp3">
     </audio> -->
     <script>
-        const end = new Date('2025-08-15T00:00:00');
+        const video = document.getElementById("video-bg");
 
-        function updateCountdown() {
-            const now = new Date();
-            const diff = end - now;
+    // Unmute and play video on first click anywhere on the page
+    window.addEventListener("click", () => {
+      video.muted = false;
+      video.play();
+    }, { once: true }); // Trigger only once
 
-            if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = "🎉 It's 15th August!";
-                document.getElementById('fireworks').style.display = 'flex';
-                return;
-            }
+    // Countdown to 15 August
+    const countdown = document.getElementById("countdown");
+    function updateCountdown() {
+      const eventDate = new Date("August 15, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = eventDate - now;
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
+      if (diff <= 0) {
+        countdown.innerText = "🎉 Happy Independence Day! 🇮🇳";
+        return;
+      }
 
-            document.getElementById('countdown').innerHTML =
-                `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdown.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Run once immediately
 
         function generateWhatsAppLink() {
             const name = document.getElementById('yourName').value.trim();
