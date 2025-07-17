@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <title>15 August 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -254,10 +256,11 @@ May this day remind us not only of our rights but also our duty towards our Nati
                 
                 // const message = `🇮🇳 Independence Day Countdown is on!\n\nShared by *${name}*\n\nClick to see: ${url}`;
                 const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                window.open(whatsappLink, '_blank');
-
-                document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
-            }
+        const a = document.createElement('a');
+        a.href = whatsappLink;
+        a.target = '_blank';
+        a.click();
+                        document.getElementById("shareName").innerText = `You are sharing this as: ${name}`;
         }
 
         window.onload = () => {
